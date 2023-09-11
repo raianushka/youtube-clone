@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="filter-chip-bar">
+        <ul>
+          <li class="active">All</li>
+          <li>Videos</li>
+          <li>Channels</li>
+          <li>Playlists</li>
+          <li>Community</li>
+        </ul>
+      </div>
+      <style>
+        .filter-chip-bar {
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-chip-bar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.filter-chip-bar li {
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.filter-chip-bar li:hover {
+  background-color: #e6e6e6;
+}
+
+.filter-chip-bar li.active {
+  background-color: #2196f3;
+  color: #fff;
+}
+      </style>
+
+      <script>
+        const filterButtons = document.querySelectorAll(".filter-chip-bar li");
+const allButton = document.querySelector(".filter-chip-bar li:first-child");
+
+function filterContent(e) {
+  const selectedFilter = e.target.textContent.toLowerCase();
+  const contentItems = document.querySelectorAll(".content-item");
+  
+  if (selectedFilter === "all") {
+    contentItems.forEach(item => {
+      item.style.display = "block";
+    });
+  } else {
+    contentItems.forEach(item => {
+      if (item.classList.contains(selectedFilter)) {
+        item.style.display = "block";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  }
+
+  filterButtons.forEach(button => {
+    button.classList.remove("active");
+  });
+
+  e.target.classList.add("active");
+}
+
+filterButtons.forEach(button => {
+  button.addEventListener("click", filterContent);
+});
+
+allButton.click();
+      </script>
+</body>
+</html>
